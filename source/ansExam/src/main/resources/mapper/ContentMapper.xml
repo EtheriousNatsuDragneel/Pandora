@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alvis.exam.repository.ContentMapper">
+  <resultMap id="BaseResultMap" type="com.alvis.exam.domain.Content">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="user_level" jdbcType="INTEGER" property="userLevel" />
+    <result column="do_time" jdbcType="INTEGER" property="doTime" />
+    <result column="storm_number" jdbcType="INTEGER" property="stormNumber" />
+    <result column="question_number" jdbcType="INTEGER" property="questionNumber" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="deleted" jdbcType="BIT" property="deleted" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.alvis.exam.domain.Content">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_time, user_level, do_time, storm_number, question_number, title, deleted
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_content
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_content
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.alvis.exam.domain.Content">
+    insert into t_content (id, create_time, user_level, 
+      do_time, storm_number, question_number, 
+      title, deleted, content
+      )
+    values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{userLevel,jdbcType=INTEGER}, 
+      #{doTime,jdbcType=INTEGER}, #{stormNumber,jdbcType=INTEGER}, #{questionNumber,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.alvis.exam.domain.Content">
+    insert into t_content
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="userLevel != null">
+        user_level,
+      </if>
+      <if test="doTime != null">
+        do_time,
+      </if>
+      <if test="stormNumber != null">
+        storm_number,
+      </if>
+      <if test="questionNumber != null">
+        question_number,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userLevel != null">
+        #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="doTime != null">
+        #{doTime,jdbcType=INTEGER},
+      </if>
+      <if test="stormNumber != null">
+        #{stormNumber,jdbcType=INTEGER},
+      </if>
+      <if test="questionNumber != null">
+        #{questionNumber,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=BIT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.alvis.exam.domain.Content">
+    update t_content
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userLevel != null">
+        user_level = #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="doTime != null">
+        do_time = #{doTime,jdbcType=INTEGER},
+      </if>
+      <if test="stormNumber != null">
+        storm_number = #{stormNumber,jdbcType=INTEGER},
+      </if>
+      <if test="questionNumber != null">
+        question_number = #{questionNumber,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.alvis.exam.domain.Content">
+    update t_content
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      user_level = #{userLevel,jdbcType=INTEGER},
+      do_time = #{doTime,jdbcType=INTEGER},
+      storm_number = #{stormNumber,jdbcType=INTEGER},
+      question_number = #{questionNumber,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=BIT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.alvis.exam.domain.Content">
+    update t_content
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      user_level = #{userLevel,jdbcType=INTEGER},
+      do_time = #{doTime,jdbcType=INTEGER},
+      storm_number = #{stormNumber,jdbcType=INTEGER},
+      question_number = #{questionNumber,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="page" resultMap="BaseResultMap" parameterType="com.alvis.exam.viewmodel.admin.content.ContentPageRequestVM">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM t_content
+    <where>
+      and deleted=false
+      <if test="id != null ">
+        and id= #{id}
+      </if>
+      <if test="userLevel != null ">
+        and userLevel= #{userLevel}
+      </if>
+    </where>
+  </select>
+</mapper>

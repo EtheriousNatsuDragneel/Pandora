@@ -1,0 +1,8 @@
+spring:
+  redis:
+    host: 127.0.0.1
+  datasource:
+    url: jdbc:mysql://192.168.12.20:3306/exam?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true
+    username: root
+    password: 0m^5c7sF4^unapdZ
+    driverClassName: com.mysql.jdbc.Driver
